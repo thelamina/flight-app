@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loading, Modal } from '../../components';
-import { login, loginCleanup } from '../../store/actions/auth';
+import { login, logout, loginCleanup } from '../../store/actions/auth';
 import { Form, Notification } from '../../components';
 import isLoggedin from '../../helpers/isLoggedin';
+import { Typography } from '@material-ui/core';
 
 const LoginForm = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
+	const location = useLocation();
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [rememberMe, setRememberMe] = useState(false);
@@ -17,18 +19,27 @@ const LoginForm = () => {
 	const loginState = useSelector((state) => state.login);
 	const data = { username, password, rememberMe };
 
+	useEffect(() => {
+		dispatch(logout());
+	}, []);
+
+	useEffect(() => {
+		setMessage(loginState.error);
+		// return () => {
+		// 	dispatch(loginCleanup());
+		// };
+	}, [loginState.error]);
+
 	const handleLogin = (e) => {
 		e.preventDefault();
-		const data = { username, password, rememberMe };
-		dispatch(login(data));
 
-		if (loginState.isSuccessful) {
+		const data = { username, password, rememberMe };
+		if (username && password) {
+			const { from } = location.state || { from: { pathname: '/' } };
+			dispatch(login(data, from));
+		}
+		if (!loginState.isSuccessful) {
 			setOpen(true);
-			setMessage('Welcome buddy!');
-			history.push('/');
-		} else {
-			setOpen(true);
-			setMessage(loginState.error);
 		}
 	};
 
@@ -72,6 +83,7 @@ const LoginForm = () => {
 						onChange={() => setRememberMe(!rememberMe)}
 						label='Remember me'
 					/>
+
 					{
 						<Form.Button
 							type='submit'

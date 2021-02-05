@@ -120,35 +120,13 @@ const ListCities = () => {
 			<div className={classes.root}>
 				<Modal title='Airport' open={open} handleClose={handleClose}>
 					<AirportInfo data={airData} />
-					{/* <Typography gutterBottom>
-						Cras mattis consectetur purus sit amet fermentum. Cras
-						justo odio, dapibus ac facilisis in, egestas eget quam.
-						Morbi leo risus, porta ac consectetur ac, vestibulum at
-						eros.
-					</Typography>
-					<Typography gutterBottom>
-						Praesent commodo cursus magna, vel scelerisque nisl
-						consectetur et. Vivamus sagittis lacus vel augue laoreet
-						rutrum faucibus dolor auctor.
-					</Typography>
-					<Typography gutterBottom>
-						Aenean lacinia bibendum nulla sed consectetur. Praesent
-						commodo cursus magna, vel scelerisque nisl consectetur
-						et. Donec sed odio dui. Donec ullamcorper nulla non
-						metus auctor fringilla.
-					</Typography>
-					<DialogActions>
-						<Button autoFocus onClick={null} color='primary'>
-							Save changes
-						</Button>
-					</DialogActions> */}
 				</Modal>
 				<Grid
 					style={{
 						boxSizing: 'border-box',
 					}}
 					container
-					spacing={8}
+					spacing={4}
 				>
 					{data?.slice(0, 10).map((tile) => (
 						<Grid
@@ -156,13 +134,23 @@ const ListCities = () => {
 								cursor: 'pointer',
 							}}
 							item
-							xs={4}
+							xs={12}
 							sm={3}
 							key={tile.icao24 + tile.lastSeen}
 							onClick={() => handleModalOpen(tile)}
 						>
 							<Paper className={classes.paper}>
-								{tile.icao24} <p>{tile[2]}</p>
+								<Typography>icao-24: {tile.icao24}</Typography>
+								<Typography>
+									callsign: {tile.callsign}
+								</Typography>
+								<Typography>
+									Departure Airport :{' '}
+									{tile.estDepartureAirport}
+								</Typography>
+								<Typography>
+									Arrival Airport : {tile.estArrivalAirport}
+								</Typography>
 							</Paper>
 						</Grid>
 					))}

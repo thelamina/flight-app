@@ -28,6 +28,14 @@ const login = (state = initialState, action) => {
 				isSuccessful: false,
 				error: null,
 			};
+
+		case types.LOGOUT:
+			return {
+				...state,
+				isLoading: false,
+				isSuccessful: false,
+				error: null,
+			};
 		default:
 			return state;
 	}

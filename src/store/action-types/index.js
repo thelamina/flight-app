@@ -3,10 +3,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGIN_CLEANUP = 'LOGIN_CLEANUP';
 
-export const LOGOUT_START = 'LOGOUT_START';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_FAIL = 'LOGOUT_FAIL';
-export const LOGOUT_CLEANUP = 'LOGOUT_CLEANUP';
+export const LOGOUT = 'LOGOUT';
 
 export const GET_STATES_START = 'GET_STATES_START';
 export const GET_STATES_SUCCESS = 'GET_STATES_SUCCESS';
