@@ -4,7 +4,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 
 import './index.css';
-import App from './app';
+import App from './App';
 import store from './store';
 import reportWebVitals from './reportWebVitals';
 import THEME from './styles/global-styles';
